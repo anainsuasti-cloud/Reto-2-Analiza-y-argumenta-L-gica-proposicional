@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Banner CIPAS PM - Modo juego</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Fredoka', 'Segoe UI', Arial, sans-serif; }
+  a { text-decoration: none; color: inherit; }
+  body {
+    display: flex;
+    justify-content: center;
+    background: #eef1f5;
+    padding: 30px;
+  }
+
+  .banner {
+    width: 1260px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 26px;
+    padding: 46px 55px 55px;
+    color: #ffffff;
+    background: linear-gradient(120deg, #6a4cff, #2f8fff 45%, #00c2a8 100%);
+    background-size: 200% 200%;
+    animation: bgShift 10s ease infinite;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  }
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* floating shapes */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: float 6s ease-in-out infinite;
+  }
+  .s1 { width: 90px; height: 90px; background: #ffe27a; top: 30px; left: 60px; animation-delay: 0s; }
+  .s2 { width: 55px; height: 55px; background: #ff8fb1; top: 130px; right: 120px; animation-delay: 1.2s; }
+  .s3 { width: 130px; height: 130px; background: #7dffd0; bottom: -50px; left: -40px; opacity: 0.35; animation-delay: 0.6s; }
+  .s4 { width: 40px; height: 40px; background: #ffffff; top: 260px; left: 46%; animation-delay: 2s; }
+  .star {
+    position: absolute; font-size: 22px; animation: twinkle 2.4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-18px) rotate(8deg); }
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.3; transform: scale(0.85); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .header { position: relative; z-index: 3; text-align: center; margin-bottom: 30px; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border: 2px dashed rgba(255,255,255,0.7);
+    padding: 8px 22px;
+    border-radius: 40px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    animation: pulseBadge 2.2s ease-in-out infinite;
+  }
+  @keyframes pulseBadge {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  h1 {
+    font-size: 46px;
+    font-weight: 700;
+    margin-top: 16px;
+    text-shadow: 0 4px 0 rgba(0,0,0,0.15);
+  }
+  .accent { color: #fff2b8; }
+  .subtitle {
+    font-size: 18px;
+    margin-top: 10px;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #f4f8ff;
+    font-weight: 500;
+  }
+
+  .mosaic {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .card {
+    background: #ffffff;
+    color: #23305a;
+    border-radius: 20px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 138px;
+    border: 3px solid transparent;
+    box-shadow: 0 10px 0 rgba(0,0,0,0.12);
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) forwards;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px) rotate(-1deg) scale(1.04) !important;
+    box-shadow: 0 16px 0 rgba(0,0,0,0.15);
+    border-color: #ffd23f;
+  }
+  @keyframes popIn {
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+  .card:nth-child(7) { animation-delay: 0.35s; }
+  .card:nth-child(8) { animation-delay: 0.4s; }
+  .card:nth-child(9) { animation-delay: 0.45s; }
+  .card:nth-child(10) { animation-delay: 0.5s; }
+
+  .emoji { font-size: 26px; display: block; margin-bottom: 4px; }
+  .kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 6px;
+  }
+  .k-ova { background: #ffe1b0; color: #a3540c; }
+  .k-ovi { background: #c9e6ff; color: #0c5fa5; }
+  .k-padlet { background: #d3f5da; color: #1f7a34; }
+
+  .card-title { font-size: 15px; font-weight: 700; line-height: 1.3; }
+  .card-link {
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #ff6a3d;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .padlet-card { grid-column: span 2; background: linear-gradient(120deg, #ffffff, #eefff2); }
+  .padlet-card .card-title { font-size: 18px; }
+
+  .footer {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 32px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-left { font-size: 15px; font-weight: 600; max-width: 640px; }
+  .footer-left span { display: block; font-size: 13px; font-weight: 500; color: #fff2cf; margin-top: 3px; }
+  .btn {
+    background: #ffd23f;
+    color: #4a2f00;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 30px;
+    border-radius: 40px;
+    box-shadow: 0 6px 0 #e0a800;
+    animation: bounceBtn 1.6s ease-in-out infinite;
+  }
+  @keyframes bounceBtn {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+    <div class="shape s3"></div>
+    <div class="shape s4"></div>
+    <span class="star" style="top:70px; right:260px;">⭐</span>
+    <span class="star" style="top:200px; left:180px; animation-delay:0.8s;">✨</span>
+    <span class="star" style="top:40px; left:420px; animation-delay:1.5s;">⭐</span>
+
+    <div class="header">
+      <span class="badge">🎮 Reto 2 - Analiza y argumenta: Lógica proposicional</span>
+      <h1>¡Activa tu misión en las <span class="accent">CIPAS PM</span>! 🚀</h1>
+      <p class="subtitle">Refuerza los conceptos del Reto 2, interactúa con tus compañeros y tutor, y despeja tus dudas. Antes de jugar, revisa estos power-ups 👇</p>
+    </div>
+
+    <div class="mosaic">
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/81191" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🌌</span>
+          <div class="kicker k-ova">OVA</div>
+          <div class="card-title">Universo cuantificado de la lógica</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/52738" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🔎</span>
+          <div class="kicker k-ovi">OVI</div>
+          <div class="card-title">Cuantificadores</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/70107" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🕵️</span>
+          <div class="kicker k-ovi">OVI</div>
+          <div class="card-title">Construye juicios, rompe mentiras</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/76347" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">✅</span>
+          <div class="kicker k-ovi">OVI</div>
+          <div class="card-title">Tablas de verdad</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/76536" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🔀</span>
+          <div class="kicker k-ovi">OVI</div>
+          <div class="card-title">Verdades condicionales</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/52744" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">📊</span>
+          <div class="kicker k-ova">OVA</div>
+          <div class="card-title">Tablas de verdad</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/52859" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🧮</span>
+          <div class="kicker k-ova">OVA</div>
+          <div class="card-title">Cuantificadores</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/70111" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🏆</span>
+          <div class="kicker k-ova">OVA</div>
+          <div class="card-title">Lógica categórica en acción</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card" href="https://repository.unad.edu.co/handle/10596/70112" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">🧩</span>
+          <div class="kicker k-ova">OVA</div>
+          <div class="card-title">Descifrando el lenguaje de la lógica</div>
+        </div>
+        <div class="card-link">Ver recurso →</div>
+      </a>
+
+      <a class="card padlet-card" href="https://padlet.com/yadycamacho1/bienvenidos-al-reto-2-aplicar-los-fundamentos-de-la-logica-p-6vk7ytv2p912n83j" target="_blank" rel="noopener">
+        <div>
+          <span class="emoji">📌</span>
+          <div class="kicker k-padlet">Padlet</div>
+          <div class="card-title">Bienvenidos al Reto 2: aplica los fundamentos de la lógica</div>
+        </div>
+        <div class="card-link">Abrir tablero →</div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        🎯 Haz clic en cada tarjeta para abrir el recurso.
+        <span>⚠️ No olvides inscribirte en las CIPAS · Completa tu misión y llega listo para ganar 🏅</span>
+      </div>
+      <a class="btn" href="https://campus0b.unad.edu.co/campus/accesit.php" target="_blank" rel="noopener">¡Inscríbete ya! 🙌</a>
+    </div>
+  </div>
+</body>
+</html>
